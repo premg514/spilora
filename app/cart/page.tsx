@@ -7,7 +7,6 @@ import Image from "next/image";
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity } = useCart();
 
-  // ✅ FIX: use cart directly (quantity already exists in context)
   const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -62,10 +61,10 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
             Shopping Cart
           </h1>
           <p className="text-gray-600">
@@ -73,17 +72,18 @@ export default function CartPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+                className="bg-white rounded-2xl shadow-md p-4 sm:p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="flex items-center space-x-6">
+                {/* Mobile: image + name row, then controls row */}
+                <div className="flex items-start gap-4 sm:gap-6">
                   {/* Product Image */}
-                  <div className="relative w-24 h-24 flex-shrink-0 bg-emerald-50 rounded-xl overflow-hidden">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 bg-emerald-50 rounded-xl overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -92,47 +92,59 @@ export default function CartPage() {
                     />
                   </div>
 
-                  {/* Product Details */}
-                  <div className="flex-grow">
-                    <h3 className="font-bold text-lg text-gray-900 mb-1">
-                      {item.name}
-                    </h3>
-                    <p className="text-emerald-600 font-bold text-xl">
-                      ₹{item.price}
-                    </p>
+                  {/* Right side: name + price + controls */}
+                  <div className="flex-grow flex flex-col gap-3 min-w-0">
+                    {/* Name & Price */}
+                    <div className="flex items-start justify-between">
+                      <div className="min-w-0 pr-2">
+                        <h3 className="font-bold text-base sm:text-lg text-gray-900 truncate">
+                          {item.name}
+                        </h3>
+                        <p className="text-emerald-600 font-bold text-lg sm:text-xl">
+                          ₹{item.price}
+                        </p>
+                      </div>
+                      {/* Remove Button — top-right on mobile */}
+                      <button
+                        onClick={() => updateQuantity(item.id, 0)}
+                        className="p-2 sm:p-3 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 transition-colors duration-300 flex-shrink-0"
+                        aria-label="Remove item"
+                      >
+                        <Trash2 size={18} className="sm:w-5 sm:h-5" />
+                      </button>
+                    </div>
+
+                    {/* Bottom row: Quantity + Item Total */}
+                    <div className="flex items-center justify-between">
+                      {/* Quantity Controls */}
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-300"
+                        >
+                          <Minus size={16} className="text-gray-600 sm:w-[18px] sm:h-[18px]" />
+                        </button>
+
+                        <span className="font-bold text-lg w-6 text-center">
+                          {item.quantity}
+                        </span>
+
+                        <button
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-emerald-100 hover:bg-emerald-200 flex items-center justify-center transition-colors duration-300"
+                        >
+                          <Plus size={16} className="text-emerald-600 sm:w-[18px] sm:h-[18px]" />
+                        </button>
+                      </div>
+
+                      {/* Line total */}
+                      <span className="font-bold text-gray-900">
+                        ₹{item.price * item.quantity}
+                      </span>
+                    </div>
                   </div>
-
-                  {/* Quantity Controls */}
-                  <div className="flex items-center space-x-3">
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-300"
-                    >
-                      <Minus size={18} className="text-gray-600" />
-                    </button>
-
-                    <span className="font-bold text-lg w-8 text-center">
-                      {item.quantity}
-                    </span>
-
-                    <button
-                      onClick={() =>
-                        updateQuantity(item.id, item.quantity + 1)
-                      }
-                      className="w-10 h-10 rounded-lg bg-emerald-100 hover:bg-emerald-200 flex items-center justify-center transition-colors duration-300"
-                    >
-                      <Plus size={18} className="text-emerald-600" />
-                    </button>
-                  </div>
-
-                  {/* Remove Button */}
-                  <button
-                    onClick={() => updateQuantity(item.id, 0)}
-                    className="p-3 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 transition-colors duration-300"
-                    aria-label="Remove item"
-                  >
-                    <Trash2 size={20} />
-                  </button>
                 </div>
               </div>
             ))}
@@ -140,8 +152,8 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-200 sticky top-24">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-6 border-2 border-gray-200 lg:sticky lg:top-24">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
                 Order Summary
               </h2>
 
