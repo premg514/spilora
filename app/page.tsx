@@ -1,65 +1,133 @@
-import Image from "next/image";
+import Banner from "@/components/Banner";
+import AboutSpirulina from "@/components/AboutSpirulina";
+import Uses from "@/components/Uses";
+import ProductCard from "@/components/ProductCard";
+import { products } from "@/data/products";
+import { Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <Banner />
+
+      {/* About Spirulina Section */}
+      <AboutSpirulina />
+
+      {/* Benefits Section */}
+      <Uses />
+
+      {/* Products Section */}
+      <section id="products" className="py-16 sm:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <div className="inline-block">
+              <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wide mb-2 block">
+                Premium Quality
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                Our Spirulina Products
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto rounded-full"></div>
+            </div>
+            <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+              Choose from our range of premium, organic spirulina products.
+              Each one is carefully processed to preserve maximum nutritional
+              value.
+            </p>
+          </div>
+
+          {/* Products Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+
+          {/* Quality Assurance Banner */}
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-3xl p-8 sm:p-12 text-white text-center shadow-xl">
+            <div className="flex justify-center mb-4">
+              <Sparkles size={48} className="text-emerald-200" />
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4">
+              100% Quality Guaranteed
+            </h3>
+            <p className="text-emerald-100 mb-6 max-w-3xl mx-auto text-lg">
+              All our products are certified organic, lab-tested for purity, and
+              free from contaminants. We believe in transparency and quality
+              you can trust.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-8">
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>
+                <span className="font-semibold">Organic Certified</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>
+                <span className="font-semibold">Lab Tested</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>
+                <span className="font-semibold">WHO Recognized</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>
+                <span className="font-semibold">Sustainably Grown</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              What Our Customers Say
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Priya Sharma",
+                text: "I've been using Spilora spirulina for 3 months and my energy levels have never been better! Highly recommended.",
+                rating: 5,
+              },
+              {
+                name: "Rajesh Kumar",
+                text: "Great quality product. I can feel the difference in my immunity. No more frequent colds!",
+                rating: 5,
+              },
+              {
+                name: "Anita Reddy",
+                text: "Perfect for my vegetarian diet. The protein content is amazing and it's so pure!",
+                rating: 5,
+              },
+            ].map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+              >
+                <div className="flex items-center space-x-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="text-yellow-400">
+                      ⭐
+                    </span>
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
+                <p className="font-semibold text-emerald-600">
+                  — {testimonial.name}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
