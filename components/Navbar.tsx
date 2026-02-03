@@ -8,12 +8,23 @@ export default function Navbar() {
   const { cart } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const totalItems = cart.reduce((sum: any, item: { quantity: any; }) => sum + (item.quantity || 1), 0);
+  const totalItems = cart.reduce(
+    (sum: any, item: { quantity: any }) => sum + (item.quantity || 1),
+    0,
+  );
 
   return (
     <nav className="sticky top-0 z-50 bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-800 text-white shadow-lg backdrop-blur-sm bg-opacity-95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-emerald-700 transition-colors duration-300"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
@@ -66,15 +77,6 @@ export default function Navbar() {
               )}
             </Link>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-emerald-700 transition-colors duration-300"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
 
           {/* Mobile Cart Icon */}
           <Link
