@@ -22,7 +22,7 @@ export default function CartPage() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const shipping = subtotal > 500 ? 0 : 50;
+  const shipping = 150;
   const total = subtotal + shipping;
 
   const handleWhatsAppClick = () => {
@@ -77,7 +77,7 @@ export default function CartPage() {
         <div className="flex justify-between text-gray-700">
           <span>Shipping:</span>
           <span className="font-semibold">
-            {shipping === 0 ? <span className="text-green-600">FREE</span> : `₹${shipping}`}
+            {`₹${shipping}`}
           </span>
         </div>
         <div className="flex justify-between text-base font-bold text-green-700 pt-1">
@@ -220,9 +220,7 @@ export default function CartPage() {
                 <div className="flex justify-between text-gray-700">
                   <span>Shipping</span>
                   <span className="font-semibold">
-                    {shipping === 0 ? (
-                      <span className="text-green-600">FREE</span>
-                    ) : (
+                    {(
                       `₹${shipping}`
                     )}
                   </span>

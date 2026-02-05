@@ -29,7 +29,7 @@ export default function ProductActions({ product }: { product: Product }) {
 
   // Calculate totals with shipping
   const subtotal = product.price * quantity;
-  const shipping = subtotal > 500 ? 0 : 50;
+  const shipping = 150;
   const total = subtotal + shipping;
 
   const handleAddToCart = () => {
@@ -84,7 +84,7 @@ export default function ProductActions({ product }: { product: Product }) {
         <div className="flex justify-between text-gray-700">
           <span>Shipping:</span>
           <span className="font-semibold">
-            {shipping === 0 ? <span className="text-green-600">FREE</span> : `₹${shipping}`}
+            {`₹${shipping}`}
           </span>
         </div>
         <div className="flex justify-between text-base font-bold text-green-700 pt-1">
