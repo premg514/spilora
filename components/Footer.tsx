@@ -101,13 +101,13 @@ export default function Footer() {
               <li className="flex items-start space-x-3 text-emerald-200">
                 <MapPin size={18} className="mt-1 flex-shrink-0" />
                 <span className="text-sm">
-                  Tadepalligudem, Andhra Pradesh, India
+                  Bhimavaram, Andhra Pradesh, India
                 </span>
               </li>
               <li className="flex items-start space-x-3 text-emerald-200">
                 <Phone size={18} className="mt-1 flex-shrink-0" />
                 <a
-                  href="tel:+916302903019"
+                  href="tel:+919100057026"
                   className="text-sm hover:text-white transition-colors duration-300"
                 >
                   +91 63029 03019

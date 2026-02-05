@@ -47,7 +47,7 @@ export default function CartPage() {
     )}%0APincode: ${userDetails.pincode}`;
 
     const totalMessage = `%0A%0ASubtotal: ₹${subtotal}%0AShipping: ₹${shipping}%0A*Total: ₹${total}*`;
-    const phone = "916302903019";
+    const phone = "919100057026";
 
     window.open(
       `https://wa.me/${phone}?text=Hi! I would like to order:%0A%0A${message}${customerInfo}${totalMessage}`,

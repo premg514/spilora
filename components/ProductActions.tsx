@@ -58,7 +58,7 @@ export default function ProductActions({ product }: { product: Product }) {
     // Total with shipping
     const totalMessage = `%0A%0ASubtotal: ₹${subtotal}%0AShipping: ₹${shipping}%0A*Total: ₹${total}*`;
 
-    const phone = "916302903019"; // Your WhatsApp number
+    const phone = "919100057026"; // Your WhatsApp number
 
     window.open(
       `https://wa.me/${phone}?text=Hi! I would like to order:%0A%0A${productMessage}${customerInfo}${totalMessage}`,
