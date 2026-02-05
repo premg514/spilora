@@ -20,10 +20,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: any) {
   return (
     <html lang="en">
-      <style>
-        @import
-        url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@100..900&display=swap');
-      </style>
       <body className={teluguFont.variable}>
         <CartProvider>
           <Navbar />
