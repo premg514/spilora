@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Play } from "lucide-react";
 import Link from "next/link";
 
 export default function Banner() {
@@ -70,22 +70,47 @@ export default function Banner() {
             </div>
           </div>
 
-          {/* Image/Visual */}
+          {/* YouTube Video Section */}
           <div className="relative animate-fadeInUp" style={{ animationDelay: "0.2s" }}>
+            {/* Floating animated particles around video */}
+            <div className="absolute -top-6 -left-6 w-16 h-16 bg-emerald-400 rounded-full blur-xl opacity-40 animate-bounce" style={{ animationDuration: '3s' }}></div>
+            <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-teal-400 rounded-full blur-xl opacity-40 animate-bounce" style={{ animationDuration: '4s', animationDelay: '0.5s' }}></div>
+            <div className="absolute top-1/2 -right-8 w-12 h-12 bg-cyan-400 rounded-full blur-lg opacity-30 animate-bounce" style={{ animationDuration: '3.5s', animationDelay: '1s' }}></div>
+            
             <div className="relative z-10">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-3xl transform rotate-3 opacity-20"></div>
-              <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform -rotate-1 hover:rotate-0 transition-transform duration-500">
-                <img
-                  src="/spirulina.jpg"
-                  alt="Pure Spirulina"
-                  className="w-full h-auto rounded-2xl"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%2310b981' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='24' fill='white' text-anchor='middle' dy='.3em'%3ESpirulina%3C/text%3E%3C/svg%3E";
-                  }}
-                />
-                <div className="absolute -top-4 -right-4 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full font-bold shadow-lg transform rotate-12">
+              {/* Animated gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-3xl transform rotate-3 opacity-20 animate-pulse"></div>
+              
+              {/* Video container */}
+              <div className="relative bg-white rounded-3xl shadow-2xl p-4 sm:p-6 transform -rotate-1 hover:rotate-0 transition-all duration-500 hover:shadow-emerald-200">
+                {/* Decorative corner accents */}
+                <div className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-emerald-500 rounded-tl-3xl opacity-50"></div>
+                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-emerald-500 rounded-br-3xl opacity-50"></div>
+                
+                {/* Video embed */}
+                <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg">
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/LqtIAP3_k98?si=6v1MKuITCokeHuiL"
+                    title="Spirulina Benefits Video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                
+                {/* Animated bottom accent */}
+                <div className="mt-3 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-full animate-pulse"></div>
+                
+                {/* WHO Approved badge */}
+                <div className="absolute -top-4 -right-4 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full font-bold shadow-lg transform rotate-12 hover:rotate-0 transition-transform duration-300">
                   WHO Approved
+                </div>
+                
+                {/* Optional: Watch now indicator */}
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-4 py-1.5 rounded-full text-sm font-semibold shadow-lg flex items-center space-x-1 animate-bounce">
+                  <Play size={14} fill="white" />
+                  <span>Watch Now</span>
                 </div>
               </div>
             </div>
