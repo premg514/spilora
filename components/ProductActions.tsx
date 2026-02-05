@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart, X } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+import { ShoppingCart } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { useCart } from "@/context/CartContext";
+import WhatsAppOrderModal from "@/components/WhatappOrderModal";
+
 interface Product {
   id: string;
   name: string;
@@ -23,13 +25,12 @@ export default function ProductActions({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [userDetails, setUserDetails] = useState<UserDetails>({
-    name: "",
-    phone: "",
-    address: "",
-    pincode: "",
-  });
   const { addToCart } = useCart();
+
+  // Calculate totals with shipping
+  const subtotal = product.price * quantity;
+  const shipping = subtotal > 500 ? 0 : 50;
+  const total = subtotal + shipping;
 
   const handleAddToCart = () => {
     setIsAdding(true);
@@ -43,31 +44,19 @@ export default function ProductActions({ product }: { product: Product }) {
     setShowModal(true);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setUserDetails((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const sendToWhatsApp = () => {
-    // Validate required fields
-    if (!userDetails.name || !userDetails.phone || !userDetails.address || !userDetails.pincode) {
-      alert("Please fill in all fields");
-      return;
-    }
-
+  const sendToWhatsApp = (userDetails: UserDetails) => {
     // Product details
-    const productMessage = `${product.name} (Qty: ${quantity}) - ₹${
-      product.price * quantity
-    }`;
+    const productMessage = `${product.name} (Qty: ${quantity}) - ₹${subtotal}`;
 
     // User details
-    const customerInfo = `%0A%0A*Customer Details:*%0AName: ${encodeURIComponent(userDetails.name)}%0APhone: ${userDetails.phone}%0AAddress: ${encodeURIComponent(userDetails.address)}%0APincode: ${userDetails.pincode}`;
+    const customerInfo = `%0A%0A*Customer Details:*%0AName: ${encodeURIComponent(
+      userDetails.name
+    )}%0APhone: ${userDetails.phone}%0AAddress: ${encodeURIComponent(
+      userDetails.address
+    )}%0APincode: ${userDetails.pincode}`;
 
-    // Total
-    const totalMessage = `%0A%0A*Total: ₹${product.price * quantity}*`;
+    // Total with shipping
+    const totalMessage = `%0A%0ASubtotal: ₹${subtotal}%0AShipping: ₹${shipping}%0A*Total: ₹${total}*`;
 
     const phone = "916302903019"; // Your WhatsApp number
 
@@ -76,15 +65,35 @@ export default function ProductActions({ product }: { product: Product }) {
       "_blank"
     );
 
-    // Reset and close modal
+    // Close modal
     setShowModal(false);
-    setUserDetails({
-      name: "",
-      phone: "",
-      address: "",
-      pincode: "",
-    });
   };
+
+  // Order Summary Component
+  const orderSummary = (
+    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+      <h3 className="font-semibold text-green-800 mb-2">Order Summary</h3>
+      <p className="text-gray-700">
+        {product.name} × {quantity}
+      </p>
+      <div className="border-t border-green-300 mt-3 pt-2 space-y-1 text-sm">
+        <div className="flex justify-between text-gray-700">
+          <span>Subtotal:</span>
+          <span className="font-semibold">₹{subtotal}</span>
+        </div>
+        <div className="flex justify-between text-gray-700">
+          <span>Shipping:</span>
+          <span className="font-semibold">
+            {shipping === 0 ? <span className="text-green-600">FREE</span> : `₹${shipping}`}
+          </span>
+        </div>
+        <div className="flex justify-between text-base font-bold text-green-700 pt-1">
+          <span>Total:</span>
+          <span>₹{total}</span>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -134,120 +143,13 @@ export default function ProductActions({ product }: { product: Product }) {
         </button>
       </div>
 
-      {/* Modal for User Details */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="text-2xl font-bold text-gray-800">
-                Enter Your Details
-              </h2>
-              <button
-                onClick={() => setShowModal(false)}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                <X size={24} />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 space-y-4">
-              {/* Order Summary */}
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-                <h3 className="font-semibold text-green-800 mb-2">Order Summary</h3>
-                <p className="text-gray-700">
-                  {product.name} × {quantity}
-                </p>
-                <p className="text-xl font-bold text-green-600 mt-2">
-                  Total: ₹{product.price * quantity}
-                </p>
-              </div>
-
-              {/* Name Input */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={userDetails.name}
-                  onChange={handleInputChange}
-                  placeholder="Enter your full name"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none transition-colors"
-                  required
-                />
-              </div>
-
-              {/* Phone Input */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={userDetails.phone}
-                  onChange={handleInputChange}
-                  placeholder="Enter your phone number"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none transition-colors"
-                  required
-                />
-              </div>
-
-              {/* Address Input */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Delivery Address *
-                </label>
-                <textarea
-                  name="address"
-                  value={userDetails.address}
-                  onChange={handleInputChange}
-                  placeholder="Enter your complete delivery address"
-                  rows={3}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none transition-colors resize-none"
-                  required
-                />
-              </div>
-
-              {/* Pincode Input */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Pincode *
-                </label>
-                <input
-                  type="text"
-                  name="pincode"
-                  value={userDetails.pincode}
-                  onChange={handleInputChange}
-                  placeholder="Enter pincode"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none transition-colors"
-                  required
-                />
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="p-6 border-t bg-gray-50 rounded-b-2xl space-y-3">
-              <button
-                onClick={sendToWhatsApp}
-                className="w-full flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg transform hover:scale-105"
-              >
-                <span>📱</span>
-                <span>Send Order to WhatsApp</span>
-              </button>
-              <button
-                onClick={() => setShowModal(false)}
-                className="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* WhatsApp Order Modal */}
+      <WhatsAppOrderModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        orderSummary={orderSummary}
+        onSubmit={sendToWhatsApp}
+      />
     </>
   );
 }
