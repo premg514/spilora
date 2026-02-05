@@ -108,15 +108,7 @@ export default function Footer() {
                   +91 9100057026
                 </a>
               </li>
-              <li className="flex items-start space-x-3 text-emerald-200">
-                <Mail size={18} className="mt-1 flex-shrink-0" />
-                <a
-                  href="mailto:spilora@gmail.com"
-                  className="text-sm hover:text-white transition-colors duration-300"
-                >
-                  spilora@gmail.com
-                </a>
-              </li>
+   
             </ul>
           </div>
 

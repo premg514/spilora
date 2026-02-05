@@ -151,44 +151,7 @@ export default function AboutSpirulina() {
           </div>
         </div>
 
-        {/* Scientific Benefits */}
-        <div className="bg-gradient-to-br from-emerald-900 to-teal-900 rounded-3xl p-8 sm:p-12 text-white">
-          <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
-            Science-Backed Health Benefits
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Leaf size={32} />
-              </div>
-              <h4 className="font-bold text-xl mb-2">Powerful Antioxidant</h4>
-              <p className="text-emerald-100 text-sm">
-                Contains phycocyanin, a potent antioxidant that fights free
-                radicals and reduces oxidative stress in the body.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield size={32} />
-              </div>
-              <h4 className="font-bold text-xl mb-2">Immune Support</h4>
-              <p className="text-emerald-100 text-sm">
-                Enhances immune function and helps your body defend against
-                infections and diseases naturally.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award size={32} />
-              </div>
-              <h4 className="font-bold text-xl mb-2">Complete Nutrition</h4>
-              <p className="text-emerald-100 text-sm">
-                Provides all essential amino acids, making it a complete protein
-                source ideal for vegetarians and vegans.
-              </p>
-            </div>
-          </div>
-        </div>
+    
       </div>
     </section>
   );
