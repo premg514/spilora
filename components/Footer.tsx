@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-emerald-900 via-teal-900 to-emerald-900 text-emerald-50 mt-20">
+    <footer className="bg-gradient-to-br from-emerald-900 via-teal-900 to-emerald-900 text-emerald-50">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Section */}
@@ -18,27 +19,21 @@ export default function Footer() {
             </p>
             <div className="flex space-x-3 pt-2">
               <a
-                href="#"
+                href="https://www.instagram.com/spirulina_bhimavaram/"
                 className="w-10 h-10 rounded-full bg-emerald-700 hover:bg-emerald-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
                 aria-label="Facebook"
               >
-                <span className="text-lg">f</span>
+                <span className="text-lg"><FaInstagram/></span>
               </a>
+             
               <a
-                href="#"
-                className="w-10 h-10 rounded-full bg-emerald-700 hover:bg-emerald-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
-                aria-label="Instagram"
-              >
-                <span className="text-lg">📷</span>
-              </a>
-              <a
-                href="https://wa.me/916302903019"
+                href="https://wa.me/919100057026"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-emerald-700 hover:bg-emerald-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
                 aria-label="WhatsApp"
               >
-                <MessageCircle size={18} />
+                <FaWhatsapp size={18} />
               </a>
             </div>
           </div>
@@ -110,7 +105,7 @@ export default function Footer() {
                   href="tel:+919100057026"
                   className="text-sm hover:text-white transition-colors duration-300"
                 >
-                  +91 63029 03019
+                  +91 9100057026
                 </a>
               </li>
               <li className="flex items-start space-x-3 text-emerald-200">
@@ -134,7 +129,7 @@ export default function Footer() {
               Get instant support and place your orders directly via WhatsApp.
             </p>
             <a
-              href="https://wa.me/916302903019"
+              href="https://wa.me/919100057026"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
@@ -154,18 +149,11 @@ export default function Footer() {
               © {new Date().getFullYear()} Spilora. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm text-emerald-300">
-              <Link
-                href="/privacy"
-                className="hover:text-white transition-colors duration-300"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/terms"
-                className="hover:text-white transition-colors duration-300"
-              >
-                Terms of Service
-              </Link>
+          
+               <span>Privacy Policy</span> 
+         
+               <span>Terms of Service</span> 
+              
             </div>
           </div>
         </div>
