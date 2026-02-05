@@ -20,18 +20,25 @@ export default function AboutSpirulina() {
           {/* Text Content */}
           <div className="space-y-6">
             <div className="prose prose-lg">
-              <p className="text-gray-700 leading-relaxed">
-                Spirulina is a blue-green microalgae that has been consumed for
-                centuries due to its exceptional nutritional profile. This
-                ancient superfood is one of the oldest life forms on Earth and
-                has been a vital food source for various civilizations
-                throughout history.
+              <p
+                className="text-gray-700  text-lg"
+                style={{ fontFamily: "Noto Sans Telugu" }}
+              >
+                స్పిరులినా అనేది నీలి-ఆకుపచ్చ సూక్ష్మ ఆల్గే, దీనిని దాని
+                అసాధారణమైన పోషక విలువల కారణంగా శతాబ్దాలుగా వినియోగిస్తున్నారు. ఈ
+                పురాతన సూపర్‌ఫుడ్ భూమిపై అత్యంత పురాతన జీవ రూపాలలో ఒకటి మరియు
+                చరిత్ర అంతటా వివిధ నాగరికతలకు ముఖ్యమైన ఆహార వనరుగా ఉంది.
               </p>
-              <p className="text-gray-700 leading-relaxed">
-                Rich in protein, vitamins, minerals, and antioxidants, spirulina
-                contains up to 70% protein by weight, making it one of the most
-                protein-dense foods available. It's also packed with B-vitamins,
-                beta-carotene, iron, and essential fatty acids.
+              <p
+                className="text-gray-700 text-lg "
+                style={{ fontFamily: "Noto Sans Telugu" }}
+              >
+                ప్రోటీన్లు, విటమిన్లు, ఖనిజాలు మరియు యాంటీఆక్సిడెంట్లతో
+                సమృద్ధిగా ఉన్న స్పిరులినా బరువు ప్రకారం 70% వరకు ప్రోటీన్‌ను
+                కలిగి ఉంటుంది, ఇది అందుబాటులో ఉన్న అత్యధిక ప్రోటీన్-సాంద్రత
+                కలిగిన ఆహారాలలో ఒకటిగా చేస్తుంది. ఇది B-విటమిన్లు,
+                బీటా-కెరోటిన్, ఇనుము మరియు అవసరమైన కొవ్వు ఆమ్లాలతో కూడా నిండి
+                ఉంటుంది.
               </p>
             </div>
 
@@ -55,7 +62,9 @@ export default function AboutSpirulina() {
                 </div>
                 <div>
                   <p className="text-3xl font-bold text-emerald-600">40x</p>
-                  <p className="text-sm text-gray-600">More Iron than Spinach</p>
+                  <p className="text-sm text-gray-600">
+                    More Iron than Spinach
+                  </p>
                 </div>
               </div>
             </div>
@@ -79,10 +88,13 @@ export default function AboutSpirulina() {
               </div>
 
               <div className="space-y-4">
-                <p className="text-gray-700 leading-relaxed">
-                  The World Health Organization has recognized spirulina as a
-                  valuable food source and has promoted its use in fighting
-                  malnutrition, particularly in developing countries.
+                <p
+                  className="text-gray-700 leading-relaxed text-lg"
+                  style={{ fontFamily: "Noto Sans Telugu" }}
+                >
+                  ప్రపంచ ఆరోగ్య సంస్థ స్పిరులినాను విలువైన ఆహార వనరుగా
+                  గుర్తించింది మరియు ముఖ్యంగా అభివృద్ధి చెందుతున్న దేశాలలో
+                  పోషకాహార లోపంతో పోరాడడంలో దాని ఉపయోగాన్ని ప్రోత్సహించింది.
                 </p>
 
                 <div className="bg-white rounded-lg p-4 border border-blue-100">
