@@ -22,7 +22,7 @@ type PageProps = {
 
 export default async function ProductPage({ params }: PageProps) {
   const { id } = await params;
-  const product = products.find((p) => p.id === id);
+  const product = products.find((p: { id: string; }) => p.id === id);
 
   if (!product) {
     return notFound();
@@ -91,13 +91,19 @@ export default async function ProductPage({ params }: PageProps) {
                   <Star
                     key={i}
                     size={20}
-                    className="fill-yellow-400 text-yellow-400"
+                    className={
+                      i < Math.floor(product.rating || 4.8)
+                        ? "fill-yellow-400 text-yellow-400"
+                        : "fill-gray-200 text-gray-200"
+                    }
                   />
                 ))}
               </div>
-              <span className="text-gray-600">(4.8 out of 5)</span>
+              <span className="text-gray-600">
+                ({product.rating || 4.8} out of 5)
+              </span>
               <span className="text-emerald-600 font-semibold">
-                156 reviews
+                {product.reviewCount || 156} reviews
               </span>
             </div>
 
@@ -116,16 +122,16 @@ export default async function ProductPage({ params }: PageProps) {
             <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 border-2 border-emerald-200">
               <div className="flex items-baseline space-x-3">
                 <span className="text-4xl font-bold text-emerald-600">
-                  ₹{product.price}
+                  ₹{product.price}/KG
                 </span>
                 <span className="text-gray-500 line-through text-xl">
-                  ₹{Math.round(product.price * 1.3)}
+                  ₹{product.marketprice}/KG
                 </span>
                 <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
                   Save{" "}
                   {Math.round(
-                    ((product.price * 1.3 - product.price) /
-                      (product.price * 1.3)) *
+                    ((product.marketprice - product.price) /
+                      product.marketprice) *
                       100,
                   )}
                   %
@@ -166,57 +172,139 @@ export default async function ProductPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Detailed Information Tabs */}
+        {/* Product Grade Information */}
         <div className="bg-white rounded-3xl shadow-lg p-8 mb-12">
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* How to Use */}
+          {product.name.toLowerCase().includes("animal") ? (
+            // Animal Grade Products
             <div>
-              <h3 className="font-bold text-xl text-emerald-900 mb-4 flex items-center">
-                <span className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
-                  1
-                </span>
-                How to Use
-              </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Take 3-5 grams (1 teaspoon) daily</li>
-                <li>• Mix with water, juice, or smoothies</li>
-                <li>• Best consumed in the morning</li>
-                <li>• Can be added to yogurt or food</li>
-              </ul>
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mr-4">
+                  <Leaf className="text-amber-600" size={24} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-2xl text-gray-900">
+                    Animal Grade Spirulina
+                  </h3>
+                  <p className="text-gray-600">
+                    Premium quality for livestock and aquaculture
+                  </p>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-lg text-emerald-900">
+                    Ideal For:
+                  </h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Poultry feed supplementation</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Aquaculture and fish farming</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Livestock nutrition enhancement</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Pet food fortification</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-lg text-emerald-900">
+                    Key Features:
+                  </h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>High protein content for animal growth</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Enhances egg production and quality</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Boosts immune system in livestock</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Natural pigmentation for fish and poultry</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-
-            {/* Storage */}
+          ) : (
+            // Human Grade Products
             <div>
-              <h3 className="font-bold text-xl text-emerald-900 mb-4 flex items-center">
-                <span className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
-                  2
-                </span>
-                Storage
-              </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• Store in a cool, dry place</li>
-                <li>• Keep away from direct sunlight</li>
-                <li>• Seal tightly after each use</li>
-                <li>• Best before 18 months from manufacture</li>
-              </ul>
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                  <Shield className="text-emerald-600" size={24} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-2xl text-gray-900">
+                    Human Grade Spirulina
+                  </h3>
+                  <p className="text-gray-600">
+                    Premium quality for human consumption
+                  </p>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-lg text-emerald-900">
+                    Health Benefits:
+                  </h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Complete plant-based protein source</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Supports immune system function</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Rich in vitamins and minerals</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Natural energy booster</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-lg text-emerald-900">
+                    Usage Guidelines:
+                  </h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Recommended: 3-5 grams daily</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Mix with water, smoothies, or juice</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Best consumed in the morning</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="text-emerald-600 mr-2 mt-1 flex-shrink-0" size={18} />
+                      <span>Store in cool, dry place</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-
-            {/* Safety */}
-            <div>
-              <h3 className="font-bold text-xl text-emerald-900 mb-4 flex items-center">
-                <span className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center mr-3 text-emerald-600">
-                  3
-                </span>
-                Safety & Quality
-              </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li>• 100% natural & organic</li>
-                <li>• No additives or preservatives</li>
-                <li>• Lab tested for purity</li>
-                <li>• Safe for daily consumption</li>
-              </ul>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Related Products */}
@@ -226,9 +314,9 @@ export default async function ProductPage({ params }: PageProps) {
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {products
-              .filter((p) => p.id !== product.id)
+              .filter((p: { id: any; }) => p.id !== product.id)
               .slice(0, 4)
-              .map((relatedProduct) => (
+              .map((relatedProduct:any) => (
                 <Link
                   key={relatedProduct.id}
                   href={`/product/${relatedProduct.id}`}
@@ -247,7 +335,7 @@ export default async function ProductPage({ params }: PageProps) {
                       {relatedProduct.name}
                     </h3>
                     <p className="text-emerald-600 font-bold text-lg">
-                      ₹{relatedProduct.price}
+                      ₹{relatedProduct.price}/KG
                     </p>
                   </div>
                 </Link>

@@ -94,7 +94,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span className="text-2xl font-bold text-emerald-600">
               ₹{product.price}
             </span>
-            <span className="text-sm text-gray-500 ml-1">/pack</span>
+            <span className="text-sm text-gray-500 ml-1">/KG</span>
           </div>
         </div>
 
