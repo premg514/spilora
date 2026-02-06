@@ -155,7 +155,7 @@ export default function WhatsAppOrderModal({
         <div className="p-6 border-t bg-gray-50 rounded-b-2xl space-y-3">
           <button
             onClick={handleSubmit}
-            className="w-full flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg transform hover:scale-105"
+            className="w-full flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-xl font-bold  transition-all duration-300 shadow-lg transform hover:scale-105"
           >
             <span>📱</span>
             <span>Send Order to WhatsApp</span>
