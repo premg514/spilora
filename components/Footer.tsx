@@ -9,9 +9,8 @@ export default function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h2 className="text-3xl font-bold text-white tracking-tight">
-              SPILORA
-            </h2>
+            <img src="/SPILORALOGO1.jpeg" style={{ width: "130px" }} />
+
             <p className="text-sm text-emerald-200 leading-relaxed">
               Your trusted source for 100% pure, organic spirulina. Cultivated
               with care in pristine waters to bring you nature's most powerful
@@ -23,9 +22,11 @@ export default function Footer() {
                 className="w-10 h-10 rounded-full bg-emerald-700 hover:bg-emerald-600 flex items-center justify-center transition-all duration-300 transform hover:scale-110"
                 aria-label="Facebook"
               >
-                <span className="text-lg"><FaInstagram/></span>
+                <span className="text-lg">
+                  <FaInstagram />
+                </span>
               </a>
-             
+
               <a
                 href="https://wa.me/919100057026"
                 target="_blank"
@@ -108,7 +109,6 @@ export default function Footer() {
                   +91 9100057026
                 </a>
               </li>
-   
             </ul>
           </div>
 
@@ -141,11 +141,9 @@ export default function Footer() {
               © {new Date().getFullYear()} Spilora. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm text-emerald-300">
-          
-               <span>Privacy Policy</span> 
-         
-               <span>Terms of Service</span> 
-              
+              <span>Privacy Policy</span>
+
+              <span>Terms of Service</span>
             </div>
           </div>
         </div>

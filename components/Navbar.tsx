@@ -28,14 +28,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <div className="absolute inset-0 bg-emerald-400 blur-md group-hover:blur-lg transition-all duration-300 opacity-50"></div>
-              <span className="relative text-2xl sm:text-3xl font-bold tracking-tight text-white hover:text-emerald-200 transition-colors duration-300">
-                SPILORA
-              </span>
-            </div>
-            <span className="hidden sm:inline-block text-xs text-emerald-200 font-light italic">
-              Pure Spirulina
-            </span>
+              <img src="/SPILORALOGO1.jpeg" style={{width:"130px"}}/>
+            </div>  
+            
           </Link>
 
           {/* Desktop Navigation */}
