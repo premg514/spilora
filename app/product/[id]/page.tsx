@@ -35,6 +35,9 @@ export default async function ProductPage({ params }: PageProps) {
     { icon: Truck, text: "Fast Delivery" },
   ];
 
+  // Determine unit based on product name
+  const priceUnit = product.name.toLowerCase().includes("powder") ? "KG" : "pack";
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -122,10 +125,10 @@ export default async function ProductPage({ params }: PageProps) {
             <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-6 border-2 border-emerald-200">
               <div className="flex items-baseline space-x-3">
                 <span className="text-4xl font-bold text-emerald-600">
-                  ₹{product.price}/KG
+                  ₹{product.price}/{priceUnit}
                 </span>
                 <span className="text-gray-500 line-through text-xl">
-                  ₹{product.marketprice}/KG
+                  ₹{product.marketprice}/{priceUnit}
                 </span>
                 <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
                   Save{" "}
@@ -316,30 +319,34 @@ export default async function ProductPage({ params }: PageProps) {
             {products
               .filter((p: { id: any; }) => p.id !== product.id)
               .slice(0, 4)
-              .map((relatedProduct:any) => (
-                <Link
-                  key={relatedProduct.id}
-                  href={`/product/${relatedProduct.id}`}
-                  className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                >
-                  <div className="aspect-square relative bg-emerald-50">
-                    <Image
-                      src={relatedProduct.image}
-                      alt={relatedProduct.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-gray-900 mb-2">
-                      {relatedProduct.name}
-                    </h3>
-                    <p className="text-emerald-600 font-bold text-lg">
-                      ₹{relatedProduct.price}/KG
-                    </p>
-                  </div>
-                </Link>
-              ))}
+              .map((relatedProduct:any) => {
+                const relatedPriceUnit = relatedProduct.name.toLowerCase().includes("powder") ? "KG" : "pack";
+                
+                return (
+                  <Link
+                    key={relatedProduct.id}
+                    href={`/product/${relatedProduct.id}`}
+                    className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                  >
+                    <div className="aspect-square relative bg-emerald-50">
+                      <Image
+                        src={relatedProduct.image}
+                        alt={relatedProduct.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-gray-900 mb-2">
+                        {relatedProduct.name}
+                      </h3>
+                      <p className="text-emerald-600 font-bold text-lg">
+                        ₹{relatedProduct.price}/{relatedPriceUnit}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
           </div>
         </div>
       </div>

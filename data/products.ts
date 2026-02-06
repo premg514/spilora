@@ -3,8 +3,8 @@ export const products = [
   {
     id: "1",
     name: "Spirulina Powder (Animal Grade)",
-    marketprice: 1850,
-    price: 1200,
+    marketprice: 1200,
+    price: 900,
     image: "/spirulina-powder.jpg",
     description: "Animal grade spirulina powder suitable for feed and supplements",
     rating: 4.6,
@@ -13,8 +13,8 @@ export const products = [
   {
     id: "2",
     name: "Phycospi Powder (Animal Grade)",
-    marketprice: 2450,
-    price: 1800,
+    marketprice: 1800,
+    price: 1200,
     image: "/phycospi.jpg",
     description: "High-quality phycospir powder for animal nutrition",
     rating: 4.7,
@@ -25,8 +25,8 @@ export const products = [
   {
     id: "3",
     name: "Spirulina Powder (Human Grade)",
-    marketprice: 2000,
-    price: 1800,
+    marketprice: 1800,
+    price: 1200,
     image: "/spirulina-human.jpg",
     description: "Premium human-grade spirulina powder for daily health",
     rating: 4.9,
