@@ -128,6 +128,31 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Location Section */}
+<section className="py-16 sm:py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        Visit Our Farm
+      </h2>
+      <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto rounded-full"></div>
+    </div>
+    
+ 
+      
+      <div className="bg-white rounded-2xl overflow-hidden shadow-lg h-[400px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d122403.00674165253!2d81.4787292!3d16.5213534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37d3276d22c1e1%3A0x7f6b7b90605fabd!2sOmega%20formulations%20head%20office!5e0!3m2!1sen!2sin!4v1770447613164!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+    </div>
+  </div>
+</section>
     </main>
   );
 }
