@@ -353,3 +353,8 @@ export default async function ProductPage({ params }: PageProps) {
     </div>
   );
 }
+export function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id,
+  }));
+}
